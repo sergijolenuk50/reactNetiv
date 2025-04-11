@@ -15,11 +15,14 @@ import {useState} from "react";
 import FormField from "@/components/FormField";
 import {useRouter} from "expo-router";
 import axios from "axios";
+import {useLoginMutation} from "@/services/accountServices";
 
 const LoginScreen = () => {
 
     const router = useRouter(); // Ініціалізуємо роутер
     const [form, setForm] = useState({ email: "", password: "" });
+
+    const [login, { isLoading }] = useLoginMutation()
 
     const handleChange = (field: string, value: string) => {
         setForm({ ...form, [field]: value });
@@ -28,11 +31,10 @@ const LoginScreen = () => {
     const handleSignIp = async () => {
         console.log("Вхід:", form);
         try {
-            const resp = await axios.post("https://pv212api.itstep.click/api/account/login",
-                form);
+            const res = await login({ ...form }).unwrap()
             // console.log("Result", resp);
-            const {data} = resp;
-            console.log("data", data)
+            //const {data} = res;
+            console.log("data", res)
             Alert.alert(
                 "Увага", // Title
                 "Вхід успішний. Все у ваших руках.", // Message
