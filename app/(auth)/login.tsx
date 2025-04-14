@@ -6,16 +6,21 @@ import {
     SafeAreaView,
     Text,
     TouchableOpacity,
-    View,
-    Alert
+    View
 } from "react-native";
 import {SafeAreaProvider} from "react-native-safe-area-context";
 import ScrollView = Animated.ScrollView;
 import {useState} from "react";
 import FormField from "@/components/FormField";
 import {useRouter} from "expo-router";
-import axios from "axios";
 import {useLoginMutation} from "@/services/accountServices";
+import {useAppDispatch} from "@/store";
+import {setCredentials} from "@/store/slices/userSlice";
+import {saveToSecureStore} from "@/utils/secureStore";
+import {jwtParse} from "@/utils/jwtParse";
+import {IUser} from "@/interfaces/account";
+// import {useSelector} from "react-redux";
+
 
 const LoginScreen = () => {
 
@@ -24,25 +29,31 @@ const LoginScreen = () => {
 
     const [login, { isLoading }] = useLoginMutation()
 
+    const dispatch = useAppDispatch(); // Використовуємо dispatch з Redux
+
     const handleChange = (field: string, value: string) => {
         setForm({ ...form, [field]: value });
     };
 
+
     const handleSignIp = async () => {
         console.log("Вхід:", form);
         try {
+
             const res = await login({ ...form }).unwrap()
             // console.log("Result", resp);
             //const {data} = res;
             console.log("data", res)
-            Alert.alert(
-                "Увага", // Title
-                "Вхід успішний. Все у ваших руках.", // Message
-                [], // Порожній масив для кнопок
-                { cancelable: true } // Дозволяє закрити алерт, натиснувши поза його межами
-            );
 
-            setForm({email: "", password: ""});
+
+            await saveToSecureStore('authToken', res.token)
+            dispatch(setCredentials({ user: jwtParse(res.token) as IUser, token: res.token }))
+
+            setForm({ email: "", password: "" });
+
+            // Перенаправляємо користувача на сторінку профілю
+            router.replace("/(auth)/profile");
+
         }
         catch (error) {
             console.error("Error login server", error);

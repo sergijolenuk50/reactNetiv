@@ -8,7 +8,16 @@ npm start
 ```
 npx expo install nativewind tailwindcss
 npx tailwindcss init
+
+
+npx expo install expo-secure-store
 ```
+
+npm i react-redux
+npm i @reduxjs/toolkit
+npm i jwt-decode
+
+
 ## Add code tailwindcss.config.js
 ```
 /** @type {import('tailwindcss').Config} */

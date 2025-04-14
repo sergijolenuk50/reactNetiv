@@ -7,11 +7,6 @@ export interface IUser {
     exp: number
 }
 
-export interface IUserState {
-    user: IUser | null
-    token: string | null
-}
-
 export interface ILogin {
     email: string
     password: string
@@ -26,4 +21,16 @@ export interface IUserCreate {
 }
 export interface ILoginResponse {
     token: string
+}
+
+export interface IUserInfo {
+    email: string;
+    name: string;
+    roles: string[];
+}
+
+//Повна інформація про користувача
+export interface IUserState {
+    user: IUser | null
+    token: string | null
 }
