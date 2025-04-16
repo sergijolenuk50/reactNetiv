@@ -17,6 +17,9 @@ npm i react-redux
 npm i @reduxjs/toolkit
 npm i jwt-decode
 
+npx expo install expo-file-system
+
+npx expo install expo-image-picker
 
 ## Add code tailwindcss.config.js
 ```

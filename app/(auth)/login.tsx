@@ -19,7 +19,6 @@ import {setCredentials} from "@/store/slices/userSlice";
 import {saveToSecureStore} from "@/utils/secureStore";
 import {jwtParse} from "@/utils/jwtParse";
 import {IUser} from "@/interfaces/account";
-// import {useSelector} from "react-redux";
 
 
 const LoginScreen = () => {
@@ -52,7 +51,7 @@ const LoginScreen = () => {
             setForm({ email: "", password: "" });
 
             // Перенаправляємо користувача на сторінку профілю
-            router.replace("/(auth)/profile");
+            router.replace("/profile");
 
         }
         catch (error) {

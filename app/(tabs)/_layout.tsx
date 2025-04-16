@@ -8,7 +8,7 @@ import TabBarBackground from '@/components/ui/TabBarBackground';
 import {Colors} from '@/constants/Colors';
 import {useColorScheme} from '@/hooks/useColorScheme';
 
-export default function AuthLayout() {
+export default function TabLayout() {
     const colorScheme = useColorScheme();
 
     return (
@@ -26,28 +26,15 @@ export default function AuthLayout() {
                     default: {},
                 }),
             }}>
-            <Tabs.Screen
-                name="index"
-                options={{
-                    href: null,
-                }}
-            />
 
             <Tabs.Screen
-                name="login"
+                name="profile"
                 options={{
-                    title: 'Вхід',
+                    title: 'Профіль',
                     tabBarIcon: ({color}) => <IconSymbol size={28} name="person.crop.circle" color={color}/>,
                 }}
             />
 
-            <Tabs.Screen
-                name="explore"
-                options={{
-                    title: 'Реєстрація',
-                    tabBarIcon: ({color}) => <IconSymbol size={28} name="person.badge.plus" color={color}/>,
-                }}
-            />
         </Tabs>
     );
 }
