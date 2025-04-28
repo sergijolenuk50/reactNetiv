@@ -42,7 +42,7 @@ export default function AuthLayout() {
             />
 
             <Tabs.Screen
-                name="explore"
+                name="register"
                 options={{
                     title: 'Реєстрація',
                     tabBarIcon: ({color}) => <IconSymbol size={28} name="person.badge.plus" color={color}/>,
